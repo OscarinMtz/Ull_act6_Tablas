@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Catálogo de Servicios del SPA</title>
+    <style>
+        /* Estilos base proporcionados por el usuario */
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        table { width: 80%; border-collapse: collapse; margin-top: 20px; } 
+        th, td { border: 1px solid black; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        /* Estilos para el formulario de adición */
+        .form-container { margin-bottom: 30px; padding: 15px; border: 1px solid #ccc; background-color: #f9f9f9; }
+        .form-container button { padding: 8px 15px; background-color: #38c172; color: white; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Catálogo de Servicios del SPA</h1>
+
+    <div class="form-container">
+        <h2>Registrar Nuevo Servicio</h2>
+        <form method="post">
+            {% csrf_token %} 
+            {{ form.as_p }} 
+            <button type="submit">Agregar Servicio</button>
+        </form>
+    </div>
+
+    <table>
+        <tr>
+            <th>ID (id_server)</th>
+            <th>Nombre (nombre_ser)</th>
+            <th>Descripción (desc)</th>
+            <th>Precio (precio)</th>
+            <th>Duración (duracion)</th>
+            <th>Tipo (tipo de serv)</th>
+        </tr>
+        
+        {% for servicio in servicios %}
+        <tr>
+            <td>{{ servicio.id }}</td>
+            <td>{{ servicio.nombre_ser }}</td>
+            <td>{{ servicio.desc }}</td>
+            <td>{{ servicio.precio }}</td>
+            <td>{{ servicio.duracion }}</td>
+            <td>{{ servicio.tipo_de_serv }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6">No hay servicios registrados. ¡Usa el formulario de arriba para añadir uno!</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
